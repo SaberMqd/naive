@@ -6,8 +6,18 @@ void TestSyncLog();
 void TestAsyncLog();
 
 void main() {
-	TestSyncLog();
+	//TestSyncLog();
 	TestAsyncLog();
+}
+
+void TestLogDelete() {
+	NaiveLog::Config cfg;
+	cfg._level = NaiveLog::NAIVE_INFO;
+	cfg._isAsync = true;
+	int ret = NaiveLog::GetInstance()->Init(cfg);
+	if (0 != ret) {
+		return;
+	}
 }
 
 void TestSyncLog() {

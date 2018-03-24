@@ -4,7 +4,6 @@
 #include "thread_processor.h"
 #include "../ring_object_buffer.h"
 #include "../base_constructor.h"
-//#include "../log/log.h"
 
 #include <map>
 
@@ -13,34 +12,48 @@ namespace naive {
 #define GETWORKTHREADMGR WorkThreadManager::GetInstance
 
 class WorkTask {
+
 public:
+
 	virtual bool Process() = 0;
+
 	virtual ~WorkTask() {}
+
 	explicit WorkTask() {}
+
 private:
+
 	DISALLOW_COPY_AND_ASSIGN(WorkTask);
+
 };
 
-	
 template <class Closure>
 class ClosureTask : public WorkTask {
+
 public:
+
 	explicit ClosureTask(const Closure& closure) : _closure(closure) {}
+
 	bool Process() override {
 		_closure();
 		return true;
+
 	}
+
 	Closure _closure;
 };
-	
+
+class WorkThreadManager;
+
 class WorkThread
 {
 public:
 		
-	WorkThread() :
+	explicit WorkThread(uint32_t id) :
 		_maxAsyncBufSize(48),
 		_tp(ThreadProcessor::Create()),
 		_runing(false),
+		_id(id),
 		_asyncBuf(nullptr){
 		
 	}
@@ -73,7 +86,6 @@ public:
 		}
 		std::lock_guard<std::mutex> lck(_mtx);
 		if (!_asyncBuf->Push(std::move(task))) {
-			//ND("buffer is full");
 			return -1;
 		}
 		_tp->Notify();
@@ -90,20 +102,22 @@ public:
 			_tp->Stop();
 		}
 	}
+private:
+
+	friend WorkThreadManager;
 
 	~WorkThread() {
 		Stop();
 		SafeDelete(_tp);
 		SafeDelete(_asyncBuf);
 	}
-
-private:
-		
+	
 	std::mutex				_mtx;
 	ThreadProcessor			*_tp;
 	RingObjBuf<WorkTask>	*_asyncBuf;
 	bool					_runing;
 	uint32_t				_maxAsyncBufSize;
+	uint32_t				_id;
 	DISALLOW_COPY_AND_ASSIGN(WorkThread);
 
 };
@@ -120,13 +134,17 @@ public:
 	WorkThreadManager() : _id(0) {}
 
 	~WorkThreadManager() {
-		SafeDeleteStlMap(_wts);
+		for (auto &v : _wts) {
+			delete v.second;
+			v.second = nullptr;
+		}
+		_wts.clear();
 	}
 
 	uint32_t CreateWrokThread() {
 		std::unique_lock<std::mutex> lck(_mtx);
 		_id++;
-		_wts[_id] = new WorkThread();
+		_wts[_id] = new WorkThread(_id);
 		return _id;
 	}
 
@@ -149,7 +167,7 @@ public:
 	}
 
 private:
-
+	
 	uint32_t			_id;
 	std::mutex			_mtx;
 	std::map<uint32_t, WorkThread*> _wts;
