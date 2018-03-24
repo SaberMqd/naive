@@ -40,6 +40,7 @@ public:
 	WorkThread() :
 		_maxAsyncBufSize(48),
 		_tp(ThreadProcessor::Create()),
+		_runing(false),
 		_asyncBuf(nullptr){
 		
 	}
