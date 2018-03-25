@@ -27,9 +27,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\example\test.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\log\log.cpp">
       <Filter>头文件\log</Filter>
     </ClCompile>
@@ -44,6 +41,15 @@
     </ClCompile>
     <ClCompile Include="..\..\src\realtime\realtime.cpp">
       <Filter>头文件\realtime</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\example\test_log.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\example\main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\example\test_workthread.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -91,6 +97,12 @@
     </ClInclude>
     <ClInclude Include="..\..\src\base_sys_define.h">
       <Filter>头文件\realtime</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\scoped_ref_ptr.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\example\test.h">
+      <Filter>源文件</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

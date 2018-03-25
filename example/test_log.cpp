@@ -1,14 +1,4 @@
-#include "../src/log/log.h"
-
-using namespace naive;
-
-void TestSyncLog();
-void TestAsyncLog();
-
-void main() {
-	//TestSyncLog();
-	TestAsyncLog();
-}
+#include "test.h"
 
 void TestLogDelete() {
 	NaiveLog::Config cfg;
@@ -67,4 +57,20 @@ void TestAsyncLog() {
 	NE("today is %d/%d/%d", 2018, 3, 23);
 
 	_sleep(10000);
+}
+
+void TestScopeRef() {
+	/*
+	class A : public rtc::scoped_refptr<A>
+	{
+	public:
+	A(){}
+	~A() { ND("over"); }
+
+	private:
+
+	};
+
+	rtc::scoped_refptr<A> foo = new A();
+	*/
 }

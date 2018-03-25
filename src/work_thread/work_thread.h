@@ -37,7 +37,6 @@ public:
 	bool Process() override {
 		_closure();
 		return true;
-
 	}
 
 	Closure _closure;
@@ -102,6 +101,7 @@ public:
 			_tp->Stop();
 		}
 	}
+
 private:
 
 	friend WorkThreadManager;
