@@ -143,8 +143,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\example\main.cpp" />
+    <ClCompile Include="..\..\example\test_coroutine.cpp" />
     <ClCompile Include="..\..\example\test_log.cpp" />
     <ClCompile Include="..\..\example\test_workthread.cpp" />
+    <ClCompile Include="..\..\src\coroutine\win\coroutine.cpp" />
     <ClCompile Include="..\..\src\log\log.cpp" />
     <ClCompile Include="..\..\src\log\win\win_log.cpp" />
     <ClCompile Include="..\..\src\realtime\realtime.cpp" />
@@ -156,6 +158,7 @@
     <ClInclude Include="..\..\src\base_constructor.h" />
     <ClInclude Include="..\..\src\base_socket_define.h" />
     <ClInclude Include="..\..\src\base_sys_define.h" />
+    <ClInclude Include="..\..\src\coroutine\win\coroutine.h" />
     <ClInclude Include="..\..\src\defer.h" />
     <ClInclude Include="..\..\src\log\log.h" />
     <ClInclude Include="..\..\src\log\win\win_log.h" />

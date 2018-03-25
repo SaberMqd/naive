@@ -25,6 +25,9 @@
     <Filter Include="头文件\realtime">
       <UniqueIdentifier>{eef4d15e-7a3e-4d0d-be74-74ac91e25a14}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\coroutine">
+      <UniqueIdentifier>{9bfec48f-504e-4061-a361-544916174db1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\log\log.cpp">
@@ -49,6 +52,12 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\example\test_workthread.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\coroutine\win\coroutine.cpp">
+      <Filter>头文件\coroutine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\example\test_coroutine.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -103,6 +112,9 @@
     </ClInclude>
     <ClInclude Include="..\..\example\test.h">
       <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\coroutine\win\coroutine.h">
+      <Filter>头文件\coroutine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

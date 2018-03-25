@@ -1,5 +1,5 @@
 #include "test.h"
-
+#include <stdio.h>
 void TestWorkThread() {
 	
 	auto wid = GETWORKTHREADMGR()->CreateWrokThread();
