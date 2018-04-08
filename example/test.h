@@ -20,7 +20,7 @@ void TestScopeRef();
 void TestWorkThread();
 
 //test coroutine
-void TestCoroutine();
+//void TestCoroutine();
 
 
 #endif // !_NAIVE_TEST_H_

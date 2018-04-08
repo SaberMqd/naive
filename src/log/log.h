@@ -21,12 +21,12 @@
 
 namespace naive {
 
-#define NAIVE_LOG(LEVEL,FORAMT,...) 		NaiveLog::GetInstance()->Print(LEVEL, AT,		FORAMT,	__VA_ARGS__)
-#define NAIVE_LOG_INFO_D(FORAMT,...) 		NAIVE_LOG(NaiveLog::Level::NAIVE_INFO,		FORAMT,	__VA_ARGS__)
-#define NAIVE_LOG_DEBUG_D(FORAMT, ...)		NAIVE_LOG(NaiveLog::Level::NAIVE_DEBUG,		FORAMT, __VA_ARGS__)
-#define NAIVE_LOG_WARNING_D(FORAMT, ...)	NAIVE_LOG(NaiveLog::Level::NAIVE_WARNING,	FORAMT, __VA_ARGS__)
-#define NAIVE_LOG_ERROR_D(FORAMT, ...)		NAIVE_LOG(NaiveLog::Level::NAIVE_ERROR,		FORAMT, __VA_ARGS__)
-#define NAIVE_LOG_TRACK_D(FORAMT, ...)		NAIVE_LOG(NaiveLog::Level::NAIVE_TRACK,		FORAMT, __VA_ARGS__)
+#define NAIVE_LOG(LEVEL,FORAMT,...) 		naive::NaiveLog::GetInstance()->Print(LEVEL, AT,		FORAMT,	__VA_ARGS__)
+#define NAIVE_LOG_INFO_D(FORAMT,...) 		NAIVE_LOG(naive::NaiveLog::Level::NAIVE_INFO,		FORAMT,	__VA_ARGS__)
+#define NAIVE_LOG_DEBUG_D(FORAMT, ...)		NAIVE_LOG(naive::NaiveLog::Level::NAIVE_DEBUG,		FORAMT, __VA_ARGS__)
+#define NAIVE_LOG_WARNING_D(FORAMT, ...)	NAIVE_LOG(naive::NaiveLog::Level::NAIVE_WARNING,	FORAMT, __VA_ARGS__)
+#define NAIVE_LOG_ERROR_D(FORAMT, ...)		NAIVE_LOG(naive::NaiveLog::Level::NAIVE_ERROR,		FORAMT, __VA_ARGS__)
+#define NAIVE_LOG_TRACK_D(FORAMT, ...)		NAIVE_LOG(naive::NaiveLog::Level::NAIVE_TRACK,		FORAMT, __VA_ARGS__)
 
 #define NAIVE_LOG_INFO(...)					NAIVE_LOG_INFO_D(__VA_ARGS__,	"")
 #define NAIVE_LOG_DEBUG(...)				NAIVE_LOG_DEBUG_D(__VA_ARGS__,	"")

@@ -35,6 +35,7 @@ private:
 	bool							_threadOver;
 	bool							_inited;
 	std::atomic<bool>				_isRuning;
+	std::atomic<bool>				_isBusy;
 	std::mutex						_mtx;
 	SafeConditionVariable			_scv;
 	SafeConditionVariable			_endScv;

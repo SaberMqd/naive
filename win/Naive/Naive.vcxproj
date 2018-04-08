@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -22,32 +22,32 @@
     <ProjectGuid>{E3B32842-3C64-407B-95DF-3AFCF478A770}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Naive</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -146,19 +146,24 @@
     <ClCompile Include="..\..\example\test_coroutine.cpp" />
     <ClCompile Include="..\..\example\test_log.cpp" />
     <ClCompile Include="..\..\example\test_workthread.cpp" />
-    <ClCompile Include="..\..\src\coroutine\win\coroutine.cpp" />
+    <ClCompile Include="..\..\src\coroutine\coroutine.cpp" />
+    <ClCompile Include="..\..\src\coroutine\coroutine_factory.cpp" />
     <ClCompile Include="..\..\src\log\log.cpp" />
     <ClCompile Include="..\..\src\log\win\win_log.cpp" />
     <ClCompile Include="..\..\src\realtime\realtime.cpp" />
     <ClCompile Include="..\..\src\work_thread\thread_processor_block.cpp" />
     <ClCompile Include="..\..\src\work_thread\thread_processor_reliable.cpp" />
+    <ClCompile Include="..\..\src\work_thread_pool\work_processor_pool_impl.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\example\test.h" />
     <ClInclude Include="..\..\src\base_constructor.h" />
     <ClInclude Include="..\..\src\base_socket_define.h" />
     <ClInclude Include="..\..\src\base_sys_define.h" />
-    <ClInclude Include="..\..\src\coroutine\win\coroutine.h" />
+    <ClInclude Include="..\..\src\coroutine.h" />
+    <ClInclude Include="..\..\src\coroutine\coroutine.h" />
+    <ClInclude Include="..\..\src\coroutine\coroutine_base_define.h" />
+    <ClInclude Include="..\..\src\coroutine\coroutine_factory.h" />
     <ClInclude Include="..\..\src\defer.h" />
     <ClInclude Include="..\..\src\log\log.h" />
     <ClInclude Include="..\..\src\log\win\win_log.h" />
@@ -172,6 +177,8 @@
     <ClInclude Include="..\..\src\work_thread\thread_processor_block.h" />
     <ClInclude Include="..\..\src\work_thread\thread_processor_reliable.h" />
     <ClInclude Include="..\..\src\work_thread\work_thread.h" />
+    <ClInclude Include="..\..\src\work_thread_pool\work_processor_pool.h" />
+    <ClInclude Include="..\..\src\work_thread_pool\work_processor_pool_impl.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

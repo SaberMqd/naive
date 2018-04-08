@@ -13,6 +13,7 @@ ThreadProcessorReliable::ThreadProcessorReliable():
 	_threadOver(false),
 	_shouldStop(false),
 	_isRuning(false),
+	_isBusy(false),
 	_inited(false){
 }
 

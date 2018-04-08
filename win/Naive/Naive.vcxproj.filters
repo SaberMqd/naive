@@ -28,6 +28,9 @@
     <Filter Include="头文件\coroutine">
       <UniqueIdentifier>{9bfec48f-504e-4061-a361-544916174db1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\work_processor_pool">
+      <UniqueIdentifier>{40f91bc4-bff5-4442-842d-32d862b75186}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\log\log.cpp">
@@ -54,11 +57,17 @@
     <ClCompile Include="..\..\example\test_workthread.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\coroutine\win\coroutine.cpp">
-      <Filter>头文件\coroutine</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\example\test_coroutine.cpp">
       <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\coroutine\coroutine.cpp">
+      <Filter>头文件\coroutine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\coroutine\coroutine_factory.cpp">
+      <Filter>头文件\coroutine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\work_thread_pool\work_processor_pool_impl.cpp">
+      <Filter>头文件\work_processor_pool</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -113,8 +122,23 @@
     <ClInclude Include="..\..\example\test.h">
       <Filter>源文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\coroutine\win\coroutine.h">
+    <ClInclude Include="..\..\src\coroutine.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\coroutine\coroutine.h">
       <Filter>头文件\coroutine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\coroutine\coroutine_base_define.h">
+      <Filter>头文件\coroutine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\coroutine\coroutine_factory.h">
+      <Filter>头文件\coroutine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\work_thread_pool\work_processor_pool_impl.h">
+      <Filter>头文件\work_processor_pool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\work_thread_pool\work_processor_pool.h">
+      <Filter>头文件\work_processor_pool</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
