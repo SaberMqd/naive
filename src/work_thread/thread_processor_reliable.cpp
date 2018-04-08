@@ -60,4 +60,12 @@ void ThreadProcessorReliable::Stop() {
 	_isRuning = false;
 }
 
+void ThreadProcessorReliable::SetID(const std::string &id) {
+	_id = id;
+}
+
+const std::string& ThreadProcessorReliable::GetID() const {
+	return _id;
+}
+
 }

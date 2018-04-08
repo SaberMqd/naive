@@ -7,6 +7,7 @@
 #include <list>
 #include <atomic>
 #include "../work_thread/thread_processor.h"
+#include <mutex>
 
 namespace naive {
 
@@ -22,9 +23,13 @@ namespace naive {
 		
 		int PostSyncTask(const std::string& name, std::unique_ptr<ProcessorTask> task) override;
 
+		int PostSyncTask(const std::string& name, std::function<void()> func) override;
+
 		void ReleaseSyncTaskQueue(const std::string& name) override;
 
 		int PostAsyncTask(std::unique_ptr<ProcessorTask> task) override;
+
+		int PostAsyncTask(std::function<void()> func) override;
 
 		~WorkProcessorPoolImpl();
 
@@ -38,6 +43,7 @@ namespace naive {
 			};
 			std::atomic<State> _state = FREE;
 			RingObjBuf<ProcessorTask> *_queue = nullptr;
+			std::mutex _mtx;
 			~WorkQueue() {
 				SafeDelete(_queue);
 			}
@@ -46,6 +52,9 @@ namespace naive {
 		std::map<std::string, WorkQueue*> _wps;
 		std::list<ThreadProcessor*>		  _tps;
 		RingObjBuf<ProcessorTask> *_asyncTaskQueue;
+
+		std::mutex _pushMtx;
+		std::mutex _popMtx;
 
 	};
 

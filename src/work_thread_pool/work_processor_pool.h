@@ -4,14 +4,15 @@
 #include <memory>
 #include <string>
 #include <cstdint>
+#include <functional>
 
 namespace naive {
 
-#define WPSP(x,y) naive::WorkProcessorPool::Instance()->PostSyncTask((x),(y))
-#define WPAP(x) naive::WorkProcessorPool::Instance()->PostAsyncTask(x)
+#define POST_SYNC_TASK(x,y) naive::WorkProcessorPool::Instance()->PostSyncTask((x),(y))
+#define POST_ASYNC_TASK(x) naive::WorkProcessorPool::Instance()->PostAsyncTask(x)
 
-#define WPSCRT(x,y) naive::WorkProcessorPool::Instance()->CreateSyncTaskQueue((x),(y))
-#define WPSTOP(x) naive::WorkProcessorPool::Instance()->ReleaseSyncTaskQueue(x)
+#define CREATE_SYNC_TASK(x,y) naive::WorkProcessorPool::Instance()->CreateSyncTaskQueue((x),(y))
+#define RELEASE_SYNC_TASK(x) naive::WorkProcessorPool::Instance()->ReleaseSyncTaskQueue(x)
 
 	struct ProcessorTask{
 		virtual void Processor() = 0;
@@ -31,9 +32,13 @@ namespace naive {
 		
 		virtual int PostSyncTask(const std::string& name, std::unique_ptr<ProcessorTask> task) = 0;
 		
+		virtual int PostSyncTask(const std::string& name, std::function<void()> func) = 0;
+
 		virtual void ReleaseSyncTaskQueue(const std::string& name) = 0;
 
 		virtual int PostAsyncTask(std::unique_ptr<ProcessorTask> task) = 0;
+
+		virtual int PostAsyncTask(std::function<void()> func) = 0;
 
 		virtual  ~WorkProcessorPool() {}
 

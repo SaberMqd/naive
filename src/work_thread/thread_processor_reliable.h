@@ -24,6 +24,10 @@ public:
 
 	void Stop() override;
 
+	void SetID(const std::string &id) override;
+
+	const std::string& GetID() const override;
+
 	~ThreadProcessorReliable();
 
 private:
@@ -39,6 +43,8 @@ private:
 	std::mutex						_mtx;
 	SafeConditionVariable			_scv;
 	SafeConditionVariable			_endScv;
+
+	std::string						_id;
 
 	DISALLOW_COPY_AND_ASSIGN(ThreadProcessorReliable);
 

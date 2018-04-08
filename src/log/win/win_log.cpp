@@ -32,6 +32,7 @@ void Win32Log::PlateFormat(std::string levelStr,const char* location, char * _in
 
 void Win32Log::PlatePrint(const char* buf) {
 	std::cout << buf << std::endl;
+	std::cout.flush();
 }
 
 };
