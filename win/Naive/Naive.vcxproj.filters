@@ -140,5 +140,8 @@
     <ClInclude Include="..\..\src\work_thread_pool\work_processor_pool.h">
       <Filter>头文件\work_processor_pool</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\lock\read_write_lock.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

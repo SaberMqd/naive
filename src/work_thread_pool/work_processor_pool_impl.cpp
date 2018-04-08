@@ -1,4 +1,5 @@
 #include "work_processor_pool_impl.h"
+#include "../defer.h"
 
 namespace naive {
 
@@ -23,6 +24,8 @@ namespace naive {
 						return true;
 					}
 
+					_rwLock.ReadLock();
+					defer([this] {_rwLock.ReadUnlock(); });
 					for (auto &wp : _wps) {
 						if (WorkQueue::FREE != wp.second->_state) {
 							return true;
@@ -46,6 +49,7 @@ namespace naive {
 								wp.second->_state = WorkQueue::FREE;
 							}
 							wp.second->_mtx.unlock();
+							return true;
 						}
 					}
 					return true; 
@@ -126,12 +130,14 @@ namespace naive {
 	}
 
 	void WorkProcessorPoolImpl::ReleaseSyncTaskQueue(const std::string& name) {
+		_rwLock.WriteLock();
+		defer([this] {_rwLock.WriteUnlock(); });
 		auto wp = _wps.find(name);
 		if (wp == _wps.end()) {
 			return;
 		}
 		while (wp->second->_state != WorkQueue::FREE){
-			_sleep(1);
+			_sleep(0);
 		}
 		_wps.erase(wp);
 	}

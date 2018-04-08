@@ -8,6 +8,7 @@
 #include <atomic>
 #include "../work_thread/thread_processor.h"
 #include <mutex>
+#include "../lock/read_write_lock.h"
 
 namespace naive {
 
@@ -55,6 +56,8 @@ namespace naive {
 
 		std::mutex _pushMtx;
 		std::mutex _popMtx;
+
+		ReadWriteLock _rwLock;
 
 	};
 

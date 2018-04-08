@@ -165,6 +165,7 @@
     <ClInclude Include="..\..\src\coroutine\coroutine_base_define.h" />
     <ClInclude Include="..\..\src\coroutine\coroutine_factory.h" />
     <ClInclude Include="..\..\src\defer.h" />
+    <ClInclude Include="..\..\src\lock\read_write_lock.h" />
     <ClInclude Include="..\..\src\log\log.h" />
     <ClInclude Include="..\..\src\log\win\win_log.h" />
     <ClInclude Include="..\..\src\realtime\realtime.h" />
