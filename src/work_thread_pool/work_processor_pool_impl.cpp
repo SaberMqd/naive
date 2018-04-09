@@ -10,7 +10,7 @@ namespace naive {
 
 	WorkProcessorPoolImpl::WorkProcessorPoolImpl() : 
 		_asyncTaskQueue(nullptr),
-		_maxPorcessorCount(0){
+		_maxProcessorCount(0){
 
 	}
 
@@ -21,8 +21,8 @@ namespace naive {
 	}
 
 	void WorkProcessorPoolImpl::Init(uint32_t defaultProcessorCount) {
-		_maxPorcessorCount = defaultProcessorCount;
-		for (int i = 0; i < _maxPorcessorCount; ++i) {
+		_maxProcessorCount = defaultProcessorCount;
+		for (uint32_t i = 0; i < _maxProcessorCount; ++i) {
 			auto tp = ThreadProcessor::Create();
 			tp->Run([this, tp] {
 				{

@@ -1,9 +1,9 @@
 #include "test.h"
-#include <stdio.h>
+
 void TestWorkThread() {
 	
-	auto wid = GETWORKTHREADMGR()->CreateWrokThread();
-	auto wth = GETWORKTHREADMGR()->GetWrokThread(wid);
+	auto wid = WPM_CREATE_WORK();
+	auto wth = WPM_GET_WORK(wid);
 
 	if (wth) {
 
@@ -18,7 +18,7 @@ void TestWorkThread() {
 	}
 
 	//delete this workthread nodelay
-	//GETWORKTHREADMGR()->DeleteWorkThread(wid); 
+	WPM_DELETE_WORK(wid); 
 
 	_sleep(2 * 1000);
 }

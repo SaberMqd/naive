@@ -37,7 +37,7 @@ namespace naive {
 
 	private:
 		
-		uint32_t _maxPorcessorCount;
+		uint32_t _maxProcessorCount;
 		struct WorkQueue {
 			enum State {
 				FREE = 0,

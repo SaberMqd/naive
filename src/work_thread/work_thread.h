@@ -9,7 +9,9 @@
 
 namespace naive {
 
-#define GETWORKTHREADMGR WorkThreadManager::GetInstance
+#define WPM_CREATE_WORK naive::WorkThreadManager::GetInstance()->CreateWrokThread
+#define WPM_GET_WORK(x) naive::WorkThreadManager::GetInstance()->GetWrokThread(x)
+#define WPM_DELETE_WORK(x) naive::WorkThreadManager::GetInstance()->DeleteWorkThread(x) 
 
 class WorkTask {
 

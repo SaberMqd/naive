@@ -33,8 +33,8 @@ int NaiveLog::Init(const Config& config) {
 	}
 
 	if (_config._isAsync && !_wtd) {
-		auto wid = GETWORKTHREADMGR()->CreateWrokThread();
-		_wtd = GETWORKTHREADMGR()->GetWrokThread(wid);
+		auto wid = WPM_CREATE_WORK();
+		_wtd = WPM_GET_WORK(wid);
 		_wtd->SetMaxTaskNum(64);
 		_wtd->Run();
 	}
