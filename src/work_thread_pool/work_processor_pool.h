@@ -28,7 +28,7 @@ namespace naive {
 		//default processor count is 1  
 		virtual void SetMaxProcessorCount(uint32_t count) = 0;
 
-		virtual int CreateSyncTaskQueue(const std::string& name, uint32_t maxQueueSize) = 0;
+		virtual int CreateSyncTaskQueue(const std::string& name, uint32_t maxQueueSize = 24) = 0;
 		
 		virtual int PostSyncTask(const std::string& name, std::unique_ptr<ProcessorTask> task) = 0;
 		

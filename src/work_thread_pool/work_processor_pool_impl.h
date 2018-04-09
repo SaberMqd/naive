@@ -9,6 +9,7 @@
 #include "../work_thread/thread_processor.h"
 #include <mutex>
 #include "../lock/read_write_lock.h"
+#include <shared_mutex>
 
 namespace naive {
 
@@ -20,7 +21,7 @@ namespace naive {
 		
 		void SetMaxProcessorCount(uint32_t count) override;
 
-		int CreateSyncTaskQueue(const std::string& name, uint32_t maxQueueSize = 24) override;
+		int CreateSyncTaskQueue(const std::string& name, uint32_t maxQueueSize) override;
 		
 		int PostSyncTask(const std::string& name, std::unique_ptr<ProcessorTask> task) override;
 
@@ -56,9 +57,7 @@ namespace naive {
 
 		std::mutex _pushMtx;
 		std::mutex _popMtx;
-
-		ReadWriteLock _rwLock;
-
+		std::shared_mutex _shareMtx;
 	};
 
 }

@@ -4,6 +4,7 @@
 #include <mutex>
 #include <atomic>
 #include <cstdint>
+#include <shared_mutex>
 
 #include "../base_constructor.h"
 
@@ -17,11 +18,13 @@ namespace naive {
 
 		void ReadLock() {
 			if (_tryWrite) {
+				std::shared_mutex s;
+				s.lock_shared();
 				_mtx.lock();
 				_mtx.unlock();
-			} else {
-				_pv++;
 			}
+
+			_pv++;
 		}
 
 		void ReadUnlock() {
@@ -30,8 +33,7 @@ namespace naive {
 
 		void WriteLock(){
 			_tryWrite = true;
-			while (_pv != 0){
-			}
+			while (_pv != 0){ }
 			_mtx.lock();
 		}
 

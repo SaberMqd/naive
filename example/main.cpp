@@ -1,5 +1,4 @@
 //#include "test.h"
-//#include "../src/coroutine.h"
 #include "../src/work_thread_pool/work_processor_pool.h"
 #include "../src/log/log.h"
 
@@ -18,17 +17,42 @@ void main() {
 	}
 
 	naive::WorkProcessorPool::Instance()->SetMaxProcessorCount(3);
-
+	naive::WorkProcessorPool::Instance()->CreateSyncTaskQueue("1");
+	naive::WorkProcessorPool::Instance()->CreateSyncTaskQueue("2");
 	uint32_t count = 0;
-	for (int i = 0; i < 48*10; ++i) {
-		auto ret = POST_ASYNC_TASK([] {cout << "lala" << endl;  _sleep(1); });
+	int i = 0;
+	for (int k = 0; k < 48*10; ++k) {
+		auto ret = POST_SYNC_TASK("1",[&i] {
+			cout << "///// " << i <<endl; 
+			_sleep(10); 
+		});
 		if (ret == 0) {
 			count++;
 		}
+		ret = POST_SYNC_TASK("2", [&i] {
+			cout << "***** " << i <<endl;
+			_sleep(10);
+		});
+		if (ret == 0) {
+			count++;
+		}
+		i++;
+		if (k == 200) {
+			naive::WorkProcessorPool::Instance()->ReleaseSyncTaskQueue("1");
+			naive::WorkProcessorPool::Instance()->ReleaseSyncTaskQueue("2");
+			naive::WorkProcessorPool::Instance()->CreateSyncTaskQueue("3");
+		}
+		if (k > 150) {
+			POST_SYNC_TASK("3", [&i] {
+				cout << "&&&&&& " << i << endl;
+				_sleep(10);
+			});
+		}
+		_sleep(14);
 	}
 	cout << count << endl;
 
-	_sleep(3000);
+	_sleep(5000);
 	//TestCoroutine();
 	//TestSyncLog();
 	//TestAsyncLog();
