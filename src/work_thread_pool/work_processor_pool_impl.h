@@ -51,6 +51,13 @@ namespace naive {
 			}
 		};
 
+		struct CluserTask : public ProcessorTask {
+			std::function<void()> _f = nullptr;
+			void Processor() {
+				_f();
+			}
+		};
+
 		std::map<std::string, WorkQueue*> _wps;
 		std::list<ThreadProcessor*>		  _tps;
 		RingObjBuf<ProcessorTask> *_asyncTaskQueue;

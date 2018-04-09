@@ -1,9 +1,6 @@
 #include "work_processor_pool_impl.h"
 #include "../defer.h"
 
-#include <iostream>
-using namespace std;
-
 namespace naive {
 
 	WorkProcessorPool* WorkProcessorPool::Instance() {
@@ -16,16 +13,6 @@ namespace naive {
 		_maxPorcessorCount(2){
 		for (int i = 0; i < _maxPorcessorCount; ++i) {
 			auto tp = ThreadProcessor::Create();
-			if (i == 0) {
-				tp->SetID("thread 1");
-			}
-			if (i == 1) {
-				tp->SetID("thread 2");
-			}
-			if (i == 2) {
-				tp->SetID("thread 3");
-			}
-
 			tp->Run([this, tp] {
 				_shareMtx.lock_shared();
 				defer([this] { _shareMtx.unlock_shared(); });
@@ -46,11 +33,8 @@ namespace naive {
 						}
 
 						{
-							//static int kk = 0;
-							//cout << kk++ << " " << ret <<" " <<task.get() <<endl;
 							wp.second->_mtx.lock();
 							if (ret && task.get()) {
-								cout << tp->GetID() << "  ";
 								task->Processor();
 							}
 							wp.second->_state = WorkQueue::FREE;
@@ -100,13 +84,6 @@ namespace naive {
 	}
 
 	int WorkProcessorPoolImpl::PostSyncTask(const std::string& name, std::function<void()> func) {
-		struct CluserTask : public ProcessorTask {
-			std::function<void()> _f;
-			void Processor() {
-				_f();
-			}
-		};
-
 		std::unique_ptr<CluserTask> t(new CluserTask());
 		t->_f = func;
 		return PostSyncTask(name, std::move(t));
@@ -121,13 +98,6 @@ namespace naive {
 	}
 
 	int WorkProcessorPoolImpl::PostAsyncTask(std::function<void()> func) {
-		struct CluserTask : public ProcessorTask {
-			std::function<void()> _f;
-			void Processor() {
-				_f();
-			}
-		};
-
 		std::unique_ptr<CluserTask> t(new CluserTask());
 		t->_f = func;
 		return PostAsyncTask(std::move(t));
