@@ -8,11 +8,15 @@
 
 namespace naive {
 
-#define POST_SYNC_TASK(x,y) naive::WorkProcessorPool::Instance()->PostSyncTask((x),(y))
-#define POST_ASYNC_TASK(x) naive::WorkProcessorPool::Instance()->PostAsyncTask(x)
+#define WPP_INIT(x)  naive::WorkProcessorPool::Instance()->Init(x)
 
-#define CREATE_SYNC_TASK(x,y) naive::WorkProcessorPool::Instance()->CreateSyncTaskQueue((x),(y))
-#define RELEASE_SYNC_TASK(x) naive::WorkProcessorPool::Instance()->ReleaseSyncTaskQueue(x)
+#define WPP_POST_SYNC_TASK(x,y) naive::WorkProcessorPool::Instance()->PostSyncTask((x),(y))
+#define WPP_POST_ASYNC_TASK(x) naive::WorkProcessorPool::Instance()->PostAsyncTask(x)
+
+#define WPP_CREATE_DEFAULT_SYNC_TASK(x) naive::WorkProcessorPool::Instance()->CreateSyncTaskQueue(x)
+#define WPP_CREATE_SYNC_TASK(x,y) naive::WorkProcessorPool::Instance()->CreateSyncTaskQueue(x,y)
+
+#define WPP_RELEASE_SYNC_TASK(x) naive::WorkProcessorPool::Instance()->ReleaseSyncTaskQueue(x)
 
 	struct ProcessorTask{
 		virtual void Processor() = 0;
@@ -25,8 +29,7 @@ namespace naive {
 
 		static WorkProcessorPool* Instance();
 		
-		//default processor count is 1  
-		virtual void SetMaxProcessorCount(uint32_t count) = 0;
+		virtual void Init(uint32_t defaultProcessorCount = 2) = 0;
 
 		virtual int CreateSyncTaskQueue(const std::string& name, uint32_t maxQueueSize = 24) = 0;
 		

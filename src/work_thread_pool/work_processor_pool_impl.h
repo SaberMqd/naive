@@ -19,7 +19,7 @@ namespace naive {
 
 		explicit WorkProcessorPoolImpl();
 		
-		void SetMaxProcessorCount(uint32_t count) override;
+		void Init(uint32_t defaultProcessorCount) override;
 
 		int CreateSyncTaskQueue(const std::string& name, uint32_t maxQueueSize) override;
 		

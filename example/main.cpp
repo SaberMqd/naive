@@ -15,21 +15,20 @@ void main() {
 	if (0 != ret) {
 		return;
 	}
-
-	naive::WorkProcessorPool::Instance()->SetMaxProcessorCount(3);
-	naive::WorkProcessorPool::Instance()->CreateSyncTaskQueue("1");
-	naive::WorkProcessorPool::Instance()->CreateSyncTaskQueue("2");
+	WPP_INIT(3);
+	WPP_CREATE_DEFAULT_SYNC_TASK("1");
+	WPP_CREATE_DEFAULT_SYNC_TASK("2");
 	uint32_t count = 0;
 	int i = 0;
 	for (int k = 0; k < 48*10; ++k) {
-		auto ret = POST_SYNC_TASK("1",[&i] {
+		auto ret = WPP_POST_SYNC_TASK("1",[&i] {
 			cout << "///// " << i <<endl; 
 			_sleep(10); 
 		});
 		if (ret == 0) {
 			count++;
 		}
-		ret = POST_SYNC_TASK("2", [&i] {
+		ret = WPP_POST_SYNC_TASK("2", [&i] {
 			cout << "***** " << i <<endl;
 			_sleep(10);
 		});
@@ -38,12 +37,12 @@ void main() {
 		}
 		i++;
 		if (k == 200) {
-			naive::WorkProcessorPool::Instance()->ReleaseSyncTaskQueue("1");
-			naive::WorkProcessorPool::Instance()->ReleaseSyncTaskQueue("2");
+			WPP_RELEASE_SYNC_TASK("1");
+			WPP_RELEASE_SYNC_TASK("2");
 			naive::WorkProcessorPool::Instance()->CreateSyncTaskQueue("3");
 		}
 		if (k > 150) {
-			POST_SYNC_TASK("3", [&i] {
+			WPP_POST_SYNC_TASK("3", [&i] {
 				cout << "&&&&&& " << i << endl;
 				_sleep(10);
 			});

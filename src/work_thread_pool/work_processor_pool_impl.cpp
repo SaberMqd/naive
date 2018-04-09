@@ -10,13 +10,24 @@ namespace naive {
 
 	WorkProcessorPoolImpl::WorkProcessorPoolImpl() : 
 		_asyncTaskQueue(nullptr),
-		_maxPorcessorCount(2){
+		_maxPorcessorCount(0){
+
+	}
+
+	WorkProcessorPoolImpl::~WorkProcessorPoolImpl(){
+		SafeDeleteStlList(_tps);
+		SafeDeleteStlMap(_wps);
+		SafeDelete(_asyncTaskQueue);
+	}
+
+	void WorkProcessorPoolImpl::Init(uint32_t defaultProcessorCount) {
+		_maxPorcessorCount = defaultProcessorCount;
 		for (int i = 0; i < _maxPorcessorCount; ++i) {
 			auto tp = ThreadProcessor::Create();
 			tp->Run([this, tp] {
-				_shareMtx.lock_shared();
-				defer([this] { _shareMtx.unlock_shared(); });
 				{
+					_shareMtx.lock_shared();
+					defer([this] { _shareMtx.unlock_shared(); });
 					for (auto &wp : _wps) {
 						if (WorkQueue::FREE != wp.second->_state) {
 							continue;
@@ -51,17 +62,11 @@ namespace naive {
 					task1->Processor();
 					return true;
 				}
-				return true; 
+				return true;
 			});
 			_tps.push_back(tp);
 		}
 		_asyncTaskQueue = new RingObjBuf<ProcessorTask>(48);
-	}
-
-	WorkProcessorPoolImpl::~WorkProcessorPoolImpl(){
-		SafeDeleteStlList(_tps);
-		SafeDeleteStlMap(_wps);
-		SafeDelete(_asyncTaskQueue);
 	}
 
 	int WorkProcessorPoolImpl::PostSyncTask(const std::string& name, std::unique_ptr<ProcessorTask> task) {
@@ -124,15 +129,8 @@ namespace naive {
 		if (wp == _wps.end()) {
 			return;
 		}
-		while (wp->second->_state != WorkQueue::FREE){
-			_sleep(0);
-		}
+		while (wp->second->_state != WorkQueue::FREE){}
 		_wps.erase(wp);
 	}
-
-	void WorkProcessorPoolImpl::SetMaxProcessorCount(uint32_t count) {
-		_maxPorcessorCount = count;
-	}
-
 
 }
