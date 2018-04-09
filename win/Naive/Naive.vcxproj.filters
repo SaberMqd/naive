@@ -45,9 +45,6 @@
     <ClCompile Include="..\..\src\work_thread\thread_processor_reliable.cpp">
       <Filter>头文件\work_thread\thread_processor</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\realtime\realtime.cpp">
-      <Filter>头文件\realtime</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\example\test_log.cpp">
       <Filter>源文件</Filter>
     </ClCompile>

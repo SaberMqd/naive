@@ -58,19 +58,3 @@ void TestAsyncLog() {
 
 	_sleep(10000);
 }
-
-void TestScopeRef() {
-	/*
-	class A : public rtc::scoped_refptr<A>
-	{
-	public:
-	A(){}
-	~A() { ND("over"); }
-
-	private:
-
-	};
-
-	rtc::scoped_refptr<A> foo = new A();
-	*/
-}

@@ -151,7 +151,6 @@
     <ClCompile Include="..\..\src\coroutine\coroutine_factory.cpp" />
     <ClCompile Include="..\..\src\log\log.cpp" />
     <ClCompile Include="..\..\src\log\win\win_log.cpp" />
-    <ClCompile Include="..\..\src\realtime\realtime.cpp" />
     <ClCompile Include="..\..\src\work_thread\thread_processor_block.cpp" />
     <ClCompile Include="..\..\src\work_thread\thread_processor_reliable.cpp" />
     <ClCompile Include="..\..\src\work_thread_pool\work_processor_pool_impl.cpp" />
