@@ -146,6 +146,7 @@
     <ClCompile Include="..\..\example\test_coroutine.cpp" />
     <ClCompile Include="..\..\example\test_log.cpp" />
     <ClCompile Include="..\..\example\test_workthread.cpp" />
+    <ClCompile Include="..\..\example\test_work_processor_pool.cpp" />
     <ClCompile Include="..\..\src\coroutine\coroutine.cpp" />
     <ClCompile Include="..\..\src\coroutine\coroutine_factory.cpp" />
     <ClCompile Include="..\..\src\log\log.cpp" />

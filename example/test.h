@@ -19,6 +19,8 @@ void TestScopeRef();
 
 void TestWorkThread();
 
+
+void TestWorkProcessorPool();
 //test coroutine
 //void TestCoroutine();
 
