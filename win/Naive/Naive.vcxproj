@@ -151,8 +151,8 @@
     <ClCompile Include="..\..\example\test_log.cpp" />
     <ClCompile Include="..\..\example\test_workthread.cpp" />
     <ClCompile Include="..\..\example\test_work_processor_pool.cpp" />
-    <ClCompile Include="..\..\src\coroutine\coroutine.cpp" />
-    <ClCompile Include="..\..\src\coroutine\coroutine_factory.cpp" />
+    <ClCompile Include="..\..\src\coroutine\coroutine_impl.cpp" />
+    <ClCompile Include="..\..\src\coroutine_pool\coroutine_pool_impl.cpp" />
     <ClCompile Include="..\..\src\log\log.cpp" />
     <ClCompile Include="..\..\src\log\win\win_log.cpp" />
     <ClCompile Include="..\..\src\work_thread\block_single_work_thread_impl.cpp" />
@@ -162,9 +162,9 @@
   <ItemGroup>
     <ClInclude Include="..\..\example\test.h" />
     <ClInclude Include="..\..\include\work_thread\work_thread.h" />
-    <ClInclude Include="..\..\src\coroutine\coroutine.h" />
+    <ClInclude Include="..\..\src\coroutine\coroutine_impl.h" />
     <ClInclude Include="..\..\src\coroutine\coroutine_base_define.h" />
-    <ClInclude Include="..\..\src\coroutine\coroutine_factory.h" />
+    <ClInclude Include="..\..\src\coroutine_pool\coroutine_pool_impl.h" />
     <ClInclude Include="..\..\src\log\win\win_log.h" />
     <ClInclude Include="..\..\src\work_thread\block_single_work_thread_impl.h" />
     <ClInclude Include="..\..\src\work_thread\single_work_thread_impl.h" />

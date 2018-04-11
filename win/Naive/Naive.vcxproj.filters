@@ -54,12 +54,6 @@
     <ClCompile Include="..\..\example\test_coroutine.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\coroutine\coroutine.cpp">
-      <Filter>头文件\coroutine</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\coroutine\coroutine_factory.cpp">
-      <Filter>头文件\coroutine</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\example\test_work_processor_pool.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -72,6 +66,12 @@
     <ClCompile Include="..\..\src\work_thread\block_single_work_thread_impl.cpp">
       <Filter>头文件\work_thread\block_single_work_thread</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\coroutine_pool\coroutine_pool_impl.cpp">
+      <Filter>头文件\coroutine_pool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\coroutine\coroutine_impl.cpp">
+      <Filter>头文件\coroutine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\log\win\win_log.h">
@@ -80,13 +80,7 @@
     <ClInclude Include="..\..\example\test.h">
       <Filter>源文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\coroutine\coroutine.h">
-      <Filter>头文件\coroutine</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\coroutine\coroutine_base_define.h">
-      <Filter>头文件\coroutine</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\coroutine\coroutine_factory.h">
       <Filter>头文件\coroutine</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\work_thread\single_work_thread_impl.h">
@@ -100,6 +94,12 @@
     </ClInclude>
     <ClInclude Include="..\..\include\work_thread\work_thread.h">
       <Filter>头文件\work_thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\coroutine_pool\coroutine_pool_impl.h">
+      <Filter>头文件\coroutine_pool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\coroutine\coroutine_impl.h">
+      <Filter>头文件\coroutine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

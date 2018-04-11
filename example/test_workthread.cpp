@@ -16,8 +16,6 @@ void TestWorkThread() {
 			wth->PostTask(task);
 		}
 
-		wth->Reset();
-
 	}
 
 	//delete this workthread nodelay
