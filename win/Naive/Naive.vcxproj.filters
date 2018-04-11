@@ -16,20 +16,26 @@
     <Filter Include="头文件\log">
       <UniqueIdentifier>{f47fcabb-0b43-4c2e-9d44-f173df95ed13}</UniqueIdentifier>
     </Filter>
-    <Filter Include="头文件\work_thread">
-      <UniqueIdentifier>{4db534ad-7bf1-4b50-a3ac-506ad659f41b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="头文件\work_thread\thread_processor">
-      <UniqueIdentifier>{20174497-347a-496f-afd5-d6209ffa222f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="头文件\realtime">
-      <UniqueIdentifier>{eef4d15e-7a3e-4d0d-be74-74ac91e25a14}</UniqueIdentifier>
-    </Filter>
     <Filter Include="头文件\coroutine">
       <UniqueIdentifier>{9bfec48f-504e-4061-a361-544916174db1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="头文件\work_processor_pool">
+    <Filter Include="头文件\work_thread">
+      <UniqueIdentifier>{4db534ad-7bf1-4b50-a3ac-506ad659f41b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\coroutine_pool">
+      <UniqueIdentifier>{c1df4538-8fae-446c-af93-25514f094fb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\work_processor">
+      <UniqueIdentifier>{efb1ff45-8c55-47f9-b6f4-84bbf18f6f99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\work_thread\single_work_thread">
+      <UniqueIdentifier>{20174497-347a-496f-afd5-d6209ffa222f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\work_thread\work_thread_pool">
       <UniqueIdentifier>{40f91bc4-bff5-4442-842d-32d862b75186}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\work_thread\block_single_work_thread">
+      <UniqueIdentifier>{4b31ba4a-31d6-4844-835f-ee380cfa9bb7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -38,12 +44,6 @@
     </ClCompile>
     <ClCompile Include="..\..\src\log\win\win_log.cpp">
       <Filter>头文件\log</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\work_thread\thread_processor_block.cpp">
-      <Filter>头文件\work_thread\thread_processor</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\work_thread\thread_processor_reliable.cpp">
-      <Filter>头文件\work_thread\thread_processor</Filter>
     </ClCompile>
     <ClCompile Include="..\..\example\test_log.cpp">
       <Filter>源文件</Filter>
@@ -63,67 +63,25 @@
     <ClCompile Include="..\..\src\coroutine\coroutine_factory.cpp">
       <Filter>头文件\coroutine</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\work_thread_pool\work_processor_pool_impl.cpp">
-      <Filter>头文件\work_processor_pool</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\example\test_work_processor_pool.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\work_thread\single_work_thread_impl.cpp">
+      <Filter>头文件\work_thread\single_work_thread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\work_thread\work_thread_pool_impl.cpp">
+      <Filter>头文件\work_thread\work_thread_pool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\work_thread\block_single_work_thread_impl.cpp">
+      <Filter>头文件\work_thread\block_single_work_thread</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\src\base_constructor.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\base_socket_define.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\defer.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\ring_buffer.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\ring_object_buffer.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\safe_delete.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\safe_wait.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\log\log.h">
-      <Filter>头文件\log</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\log\win\win_log.h">
       <Filter>头文件\log</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\work_thread\work_thread.h">
-      <Filter>头文件\work_thread</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\work_thread\thread_processor.h">
-      <Filter>头文件\work_thread\thread_processor</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\work_thread\thread_processor_block.h">
-      <Filter>头文件\work_thread\thread_processor</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\work_thread\thread_processor_reliable.h">
-      <Filter>头文件\work_thread\thread_processor</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\realtime\realtime.h">
-      <Filter>头文件\realtime</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\base_sys_define.h">
-      <Filter>头文件\realtime</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\scoped_ref_ptr.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\example\test.h">
       <Filter>源文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\coroutine.h">
-      <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\coroutine\coroutine.h">
       <Filter>头文件\coroutine</Filter>
@@ -134,14 +92,14 @@
     <ClInclude Include="..\..\src\coroutine\coroutine_factory.h">
       <Filter>头文件\coroutine</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\work_thread_pool\work_processor_pool_impl.h">
-      <Filter>头文件\work_processor_pool</Filter>
+    <ClInclude Include="..\..\src\work_thread\single_work_thread_impl.h">
+      <Filter>头文件\work_thread\single_work_thread</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\work_thread_pool\work_processor_pool.h">
-      <Filter>头文件\work_processor_pool</Filter>
+    <ClInclude Include="..\..\src\work_thread\work_thread_pool_impl.h">
+      <Filter>头文件\work_thread\work_thread_pool</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\lock\read_write_lock.h">
-      <Filter>头文件</Filter>
+    <ClInclude Include="..\..\src\work_thread\block_single_work_thread_impl.h">
+      <Filter>头文件\work_thread\block_single_work_thread</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

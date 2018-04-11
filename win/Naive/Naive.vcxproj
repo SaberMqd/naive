@@ -88,6 +88,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -101,6 +102,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -116,6 +118,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -133,6 +136,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -151,35 +155,19 @@
     <ClCompile Include="..\..\src\coroutine\coroutine_factory.cpp" />
     <ClCompile Include="..\..\src\log\log.cpp" />
     <ClCompile Include="..\..\src\log\win\win_log.cpp" />
-    <ClCompile Include="..\..\src\work_thread\thread_processor_block.cpp" />
-    <ClCompile Include="..\..\src\work_thread\thread_processor_reliable.cpp" />
-    <ClCompile Include="..\..\src\work_thread_pool\work_processor_pool_impl.cpp" />
+    <ClCompile Include="..\..\src\work_thread\block_single_work_thread_impl.cpp" />
+    <ClCompile Include="..\..\src\work_thread\single_work_thread_impl.cpp" />
+    <ClCompile Include="..\..\src\work_thread\work_thread_pool_impl.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\example\test.h" />
-    <ClInclude Include="..\..\src\base_constructor.h" />
-    <ClInclude Include="..\..\src\base_socket_define.h" />
-    <ClInclude Include="..\..\src\base_sys_define.h" />
-    <ClInclude Include="..\..\src\coroutine.h" />
     <ClInclude Include="..\..\src\coroutine\coroutine.h" />
     <ClInclude Include="..\..\src\coroutine\coroutine_base_define.h" />
     <ClInclude Include="..\..\src\coroutine\coroutine_factory.h" />
-    <ClInclude Include="..\..\src\defer.h" />
-    <ClInclude Include="..\..\src\lock\read_write_lock.h" />
-    <ClInclude Include="..\..\src\log\log.h" />
     <ClInclude Include="..\..\src\log\win\win_log.h" />
-    <ClInclude Include="..\..\src\realtime\realtime.h" />
-    <ClInclude Include="..\..\src\ring_buffer.h" />
-    <ClInclude Include="..\..\src\ring_object_buffer.h" />
-    <ClInclude Include="..\..\src\safe_delete.h" />
-    <ClInclude Include="..\..\src\safe_wait.h" />
-    <ClInclude Include="..\..\src\scoped_ref_ptr.h" />
-    <ClInclude Include="..\..\src\work_thread\thread_processor.h" />
-    <ClInclude Include="..\..\src\work_thread\thread_processor_block.h" />
-    <ClInclude Include="..\..\src\work_thread\thread_processor_reliable.h" />
-    <ClInclude Include="..\..\src\work_thread\work_thread.h" />
-    <ClInclude Include="..\..\src\work_thread_pool\work_processor_pool.h" />
-    <ClInclude Include="..\..\src\work_thread_pool\work_processor_pool_impl.h" />
+    <ClInclude Include="..\..\src\work_thread\block_single_work_thread_impl.h" />
+    <ClInclude Include="..\..\src\work_thread\single_work_thread_impl.h" />
+    <ClInclude Include="..\..\src\work_thread\work_thread_pool_impl.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

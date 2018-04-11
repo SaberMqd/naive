@@ -10,9 +10,9 @@
 #include <mutex>
 #include <functional>
 
-#include "../base_constructor.h"
-#include "../ring_buffer.h"
-#include "../work_thread/work_thread.h"
+#include "base_constructor.h"
+#include "ring_buffer.h"
+#include "work_thread/work_thread.h"
 
 #define STRINGIFY(x) #x
 #define TOSTRING(x) STRINGIFY(x)

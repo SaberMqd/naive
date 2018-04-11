@@ -2,7 +2,7 @@
 #define _NAIVE_COROUTINE_H_
 
 #include <functional>
-#include "../base_constructor.h"
+#include "base_constructor.h"
 
 #include <Windows.h>
 

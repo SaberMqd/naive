@@ -1,7 +1,7 @@
 #ifndef _NAIVE_WORK_THREAD_H_
 #define _NAIVE_WORK_THREAD_H_
 
-#include "thread_processor.h"
+#include "single_work_thread.h"
 #include "../ring_object_buffer.h"
 #include "../base_constructor.h"
 
@@ -52,7 +52,7 @@ public:
 		
 	explicit WorkThread(uint32_t id) :
 		_maxAsyncBufSize(48),
-		_tp(ThreadProcessor::Create()),
+		_tp(SingleWorkThread::Create()),
 		_runing(false),
 		_id(id),
 		_asyncBuf(nullptr){
@@ -115,7 +115,7 @@ private:
 	}
 	
 	std::mutex				_mtx;
-	ThreadProcessor			*_tp;
+	SingleWorkThread			*_tp;
 	RingObjBuf<WorkTask>	*_asyncBuf;
 	bool					_runing;
 	uint32_t				_maxAsyncBufSize;

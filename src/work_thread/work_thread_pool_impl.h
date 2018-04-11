@@ -1,23 +1,24 @@
-#ifndef _NAIVE_WORK_PROCESSOR_POOL_IMPL_H_
-#define _NAIVE_WORK_PROCESSOR_POOL_IMPL_H_
+#ifndef _NAIVE_WORK_THREAD_POOL_IMPL_H_
+#define _NAIVE_WORK_THREAD_POOL_IMPL_H_
 
-#include "work_processor_pool.h"
-#include "../ring_object_buffer.h"
+#include "work_thread/work_thread_pool.h"
 #include <map>
 #include <list>
 #include <atomic>
-#include "../work_thread/thread_processor.h"
 #include <mutex>
-#include "../lock/read_write_lock.h"
 #include <shared_mutex>
+
+#include "work_thread/single_work_thread.h"
+#include "read_write_lock.h"
+#include "ring_object_buffer.h"
 
 namespace naive {
 
-	class WorkProcessorPoolImpl : public WorkProcessorPool
+	class WorkThreadPoolImpl : public WorkThreadPool
 	{
 	public:
 
-		explicit WorkProcessorPoolImpl();
+		explicit WorkThreadPoolImpl();
 		
 		void Init(uint32_t defaultProcessorCount) override;
 
@@ -33,7 +34,7 @@ namespace naive {
 
 		int PostAsyncTask(std::function<void()> func) override;
 
-		~WorkProcessorPoolImpl();
+		~WorkThreadPoolImpl();
 
 	private:
 		
@@ -59,7 +60,7 @@ namespace naive {
 		};
 
 		std::map<std::string, WorkQueue*> _wps;
-		std::list<ThreadProcessor*>		  _tps;
+		std::list<SingleWorkThread*>		  _tps;
 		RingObjBuf<ProcessorTask> *_asyncTaskQueue;
 
 		std::mutex _pushMtx;
@@ -69,4 +70,4 @@ namespace naive {
 
 }
 
-#endif // !_NAIVE_WORK_PROCESSOR_POOL_IMPL_H_
+#endif // !_NAIVE_WORK_THREAD_POOL_IMPL_H_

@@ -3,8 +3,8 @@
 //
 
 #include "log.h"
-#include "../safe_wait.h"
-#include "../work_thread/work_thread.h"
+#include "safe_wait.h"
+#include "work_thread/work_thread.h"
 #include <stdarg.h>
 
 namespace naive {

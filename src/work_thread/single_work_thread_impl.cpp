@@ -1,13 +1,13 @@
-#include "thread_processor_reliable.h"
-#include "../safe_delete.h"
+#include "single_work_thread_impl.h"
+#include "safe_delete.h"
 
 namespace naive {
 
-ThreadProcessor* ThreadProcessor::Create() {
-	return new ThreadProcessorReliable();
+SingleWorkThread* SingleWorkThread::Create() {
+	return new SingleWorkThreadImpl();
 }
 
-ThreadProcessorReliable::ThreadProcessorReliable():
+SingleWorkThreadImpl::SingleWorkThreadImpl():
 	_thread(nullptr),
 	_func(nullptr),
 	_threadOver(false),
@@ -17,12 +17,12 @@ ThreadProcessorReliable::ThreadProcessorReliable():
 	_inited(false){
 }
 
-ThreadProcessorReliable::~ThreadProcessorReliable(){
+SingleWorkThreadImpl::~SingleWorkThreadImpl(){
 	Stop();
 	SafeDelete(_thread);
 }
 
-void ThreadProcessorReliable::Run(std::function<bool()> func) {
+void SingleWorkThreadImpl::Run(std::function<bool()> func) {
 	std::unique_lock<std::mutex> lg(_mtx);
 	if (_inited) {
 		return;
@@ -45,11 +45,11 @@ void ThreadProcessorReliable::Run(std::function<bool()> func) {
 	_thread->detach();
 }
 
-void ThreadProcessorReliable::Notify() {
+void SingleWorkThreadImpl::Notify() {
 	_scv.Notify();
 }
 
-void ThreadProcessorReliable::Stop() {
+void SingleWorkThreadImpl::Stop() {
 	std::unique_lock<std::mutex> lg(_mtx);
 	if (!_isRuning) {
 		return;
@@ -60,11 +60,11 @@ void ThreadProcessorReliable::Stop() {
 	_isRuning = false;
 }
 
-void ThreadProcessorReliable::SetID(const std::string &id) {
+void SingleWorkThreadImpl::SetID(const std::string &id) {
 	_id = id;
 }
 
-const std::string& ThreadProcessorReliable::GetID() const {
+const std::string& SingleWorkThreadImpl::GetID() const {
 	return _id;
 }
 

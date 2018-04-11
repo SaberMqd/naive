@@ -7,6 +7,5 @@ void main() {
 	//TestAsyncLog();
 	//TestScopeRef();
 	//TestWorkThread();
-	TestWorkProcessorPool();
-
+	//TestWorkProcessorPool();
 }

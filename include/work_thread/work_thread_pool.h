@@ -1,5 +1,5 @@
-#ifndef _NAIVE_WORK_PROCESSOR_POOL_H_
-#define _NAIVE_WORK_PROCESSOR_POOL_H_
+#ifndef _NAIVE_WORK_THREAD_POOL_H_
+#define _NAIVE_WORK_THREAD_POOL_H_
 
 #include <memory>
 #include <string>
@@ -8,26 +8,26 @@
 
 namespace naive {
 
-#define WPP_INIT(x)  naive::WorkProcessorPool::Instance()->Init(x)
+#define WPP_INIT(x)  naive::WorkThreadPool::Instance()->Init(x)
 
-#define WPP_POST_SYNC_TASK(x,y) naive::WorkProcessorPool::Instance()->PostSyncTask((x),(y))
-#define WPP_POST_ASYNC_TASK(x) naive::WorkProcessorPool::Instance()->PostAsyncTask(x)
+#define WPP_POST_SYNC_TASK(x,y) naive::WorkThreadPool::Instance()->PostSyncTask((x),(y))
+#define WPP_POST_ASYNC_TASK(x) naive::WorkThreadPool::Instance()->PostAsyncTask(x)
 
-#define WPP_CREATE_DEFAULT_SYNC_TASK(x) naive::WorkProcessorPool::Instance()->CreateSyncTaskQueue(x)
-#define WPP_CREATE_SYNC_TASK(x,y) naive::WorkProcessorPool::Instance()->CreateSyncTaskQueue(x,y)
+#define WPP_CREATE_DEFAULT_SYNC_TASK(x) naive::WorkThreadPool::Instance()->CreateSyncTaskQueue(x)
+#define WPP_CREATE_SYNC_TASK(x,y) naive::WorkThreadPool::Instance()->CreateSyncTaskQueue(x,y)
 
-#define WPP_RELEASE_SYNC_TASK(x) naive::WorkProcessorPool::Instance()->ReleaseSyncTaskQueue(x)
+#define WPP_RELEASE_SYNC_TASK(x) naive::WorkThreadPool::Instance()->ReleaseSyncTaskQueue(x)
 
 	struct ProcessorTask{
 		virtual void Processor() = 0;
 		virtual ~ProcessorTask() {}
 	};
 
-	class WorkProcessorPool {
+	class WorkThreadPool {
 	
 	public:
 
-		static WorkProcessorPool* Instance();
+		static WorkThreadPool* Instance();
 		
 		virtual void Init(uint32_t defaultProcessorCount = 2) = 0;
 
@@ -43,14 +43,14 @@ namespace naive {
 
 		virtual int PostAsyncTask(std::function<void()> func) = 0;
 
-		virtual  ~WorkProcessorPool() {}
+		virtual  ~WorkThreadPool() {}
 
 	protected:
 
-		WorkProcessorPool(){}
+		WorkThreadPool(){}
 
 	};
 
 }
 
-#endif // !_NAIVE_WORK_PROCESSOR_POOL_H_
+#endif // !_NAIVE_WORK_THREAD_POOL_H_

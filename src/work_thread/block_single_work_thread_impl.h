@@ -1,15 +1,15 @@
-#ifndef _NAIVE_THREAD_PROCESSOR_BLOCK_H_
-#define _NAIVE_THREAD_PROCESSOR_BLOCK_H_
+#ifndef _NAIVE_BLOCK_SINGLE_WORK_THREAD_IMPL_H_
+#define _NAIVE_BLOCK_SINGLE_WORK_THREAD_IMPL_H_
 
-#include "thread_processor.h"
-#include "../safe_wait.h"
-#include "../base_constructor.h"
+#include "work_thread/block_single_work_thread.h"
+#include "safe_wait.h"
+#include "base_constructor.h"
 
 #include <thread>
 
 namespace naive {
 
-class BlockThreadProcessorImpl : public BlcokThreadProcessor {
+class BlockThreadProcessorImpl : public BlockSingleWorkThread {
 
 public:
 		
@@ -42,4 +42,4 @@ private:
 }
 
 
-#endif // !_NAIVE_THREAD_PROCESSOR_BLOCK_H_
+#endif // !_NAIVE_BLOCK_SINGLE_WORK_THREAD_IMPL_H_

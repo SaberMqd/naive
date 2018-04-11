@@ -1,9 +1,9 @@
-#include "thread_processor_block.h"
-#include "../safe_delete.h"
+#include "block_single_work_thread_impl.h"
+#include "safe_delete.h"
 
 namespace naive {
 
-BlcokThreadProcessor* BlcokThreadProcessor::Create() {
+BlockSingleWorkThread* BlockSingleWorkThread::Create() {
 	return new BlockThreadProcessorImpl();
 }
 

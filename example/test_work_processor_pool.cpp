@@ -1,7 +1,8 @@
 #include "test.h"
 
-#include "../src/work_thread_pool/work_processor_pool.h"
+#include "work_thread/work_thread_pool.h"
 #include <iostream>
+
 using namespace std;
 
 void TestWorkProcessorPool() {
@@ -9,6 +10,7 @@ void TestWorkProcessorPool() {
 	WPP_INIT(3);
 	WPP_CREATE_DEFAULT_SYNC_TASK("1");
 	WPP_CREATE_DEFAULT_SYNC_TASK("2");
+
 	uint32_t count = 0;
 	int i = 0;
 	for (int k = 0; k < 48 * 10; ++k) {
@@ -30,7 +32,7 @@ void TestWorkProcessorPool() {
 		if (k == 200) {
 			WPP_RELEASE_SYNC_TASK("1");
 			WPP_RELEASE_SYNC_TASK("2");
-			naive::WorkProcessorPool::Instance()->CreateSyncTaskQueue("3");
+			WPP_CREATE_DEFAULT_SYNC_TASK("3");
 		}
 		if (k > 150) {
 			WPP_POST_SYNC_TASK("3", [&i] {

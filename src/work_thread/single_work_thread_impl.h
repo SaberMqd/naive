@@ -1,10 +1,10 @@
 #ifndef _NAIVE_THREAD_PROCESSOR_RELIABLE_H_
 #define _NAIVE_THREAD_PROCESSOR_RELIABLE_H_
 
-#include "thread_processor.h"
+#include "work_thread/single_work_thread.h"
 
-#include "../base_constructor.h"
-#include "../safe_wait.h"
+#include "base_constructor.h"
+#include "safe_wait.h"
 
 #include <mutex>
 #include <thread>
@@ -12,11 +12,11 @@
 
 namespace naive {
 
-class ThreadProcessorReliable : public ThreadProcessor{
+class SingleWorkThreadImpl : public SingleWorkThread {
 
 public:
 		
-	explicit ThreadProcessorReliable();
+	explicit SingleWorkThreadImpl();
 		
 	void Run(std::function<bool()> func) override;
 
@@ -28,7 +28,7 @@ public:
 
 	const std::string& GetID() const override;
 
-	~ThreadProcessorReliable();
+	~SingleWorkThreadImpl();
 
 private:
 
@@ -46,7 +46,7 @@ private:
 
 	std::string						_id;
 
-	DISALLOW_COPY_AND_ASSIGN(ThreadProcessorReliable);
+	DISALLOW_COPY_AND_ASSIGN(SingleWorkThreadImpl);
 
 };
 

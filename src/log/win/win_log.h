@@ -5,8 +5,8 @@
 #ifndef _NAIVE_WIN_LOG_H_
 #define _NAIVE_WIN_LOG_H_
 
-#include "../log.h"
-#include "../../base_constructor.h"
+#include "log.h"
+#include "base_constructor.h"
 
 namespace naive {
 
