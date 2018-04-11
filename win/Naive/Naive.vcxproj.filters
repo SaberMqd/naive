@@ -25,17 +25,14 @@
     <Filter Include="头文件\coroutine_pool">
       <UniqueIdentifier>{c1df4538-8fae-446c-af93-25514f094fb4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="头文件\work_processor">
-      <UniqueIdentifier>{efb1ff45-8c55-47f9-b6f4-84bbf18f6f99}</UniqueIdentifier>
-    </Filter>
     <Filter Include="头文件\work_thread\single_work_thread">
       <UniqueIdentifier>{20174497-347a-496f-afd5-d6209ffa222f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="头文件\work_thread\work_thread_pool">
-      <UniqueIdentifier>{40f91bc4-bff5-4442-842d-32d862b75186}</UniqueIdentifier>
-    </Filter>
     <Filter Include="头文件\work_thread\block_single_work_thread">
       <UniqueIdentifier>{4b31ba4a-31d6-4844-835f-ee380cfa9bb7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="work_thread_pool">
+      <UniqueIdentifier>{40f91bc4-bff5-4442-842d-32d862b75186}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -70,7 +67,7 @@
       <Filter>头文件\work_thread\single_work_thread</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\work_thread\work_thread_pool_impl.cpp">
-      <Filter>头文件\work_thread\work_thread_pool</Filter>
+      <Filter>work_thread_pool</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\work_thread\block_single_work_thread_impl.cpp">
       <Filter>头文件\work_thread\block_single_work_thread</Filter>
@@ -96,10 +93,13 @@
       <Filter>头文件\work_thread\single_work_thread</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\work_thread\work_thread_pool_impl.h">
-      <Filter>头文件\work_thread\work_thread_pool</Filter>
+      <Filter>work_thread_pool</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\work_thread\block_single_work_thread_impl.h">
       <Filter>头文件\work_thread\block_single_work_thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\work_thread\work_thread.h">
+      <Filter>头文件\work_thread</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

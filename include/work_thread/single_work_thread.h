@@ -19,7 +19,7 @@ public:
 	virtual void Stop() = 0;
 
 	virtual void SetID(const std::string &id) = 0;
-	
+
 	virtual const std::string& GetID() const = 0;
 
 	virtual ~SingleWorkThread() {}

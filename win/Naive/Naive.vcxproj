@@ -161,6 +161,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\example\test.h" />
+    <ClInclude Include="..\..\include\work_thread\work_thread.h" />
     <ClInclude Include="..\..\src\coroutine\coroutine.h" />
     <ClInclude Include="..\..\src\coroutine\coroutine_base_define.h" />
     <ClInclude Include="..\..\src\coroutine\coroutine_factory.h" />

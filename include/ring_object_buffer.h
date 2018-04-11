@@ -52,6 +52,14 @@ public:
 		return _buf[_beg].get();
 	}
 
+	void Reset() {
+		for (uint32_t i = 0; i < _len; ++i) {
+			_buf[i].reset(nullptr);
+		}
+		_beg = 0;
+		_end = 0;
+	}
+
 	~RingObjBuf() {
 		SafeDeleteArray(_buf);
 	}

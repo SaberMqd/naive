@@ -10,13 +10,13 @@
 
 namespace naive {
 
-class Win32Log : public NaiveLog {
+class WinLog : public NaiveLog {
 
 public:
 		
-	explicit Win32Log();
+	explicit WinLog();
 		
-	~Win32Log();
+	~WinLog();
 	
 private:
 		
@@ -24,7 +24,7 @@ private:
 		
 	void PlatePrint(const char* buf) override;
 		
-	DISALLOW_COPY_AND_ASSIGN(Win32Log)
+	DISALLOW_COPY_AND_ASSIGN(WinLog)
 };
 
 };

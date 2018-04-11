@@ -11,9 +11,12 @@ void TestWorkThread() {
 		wth->Run();
 
 		auto task = [wid] { NE("work thread id is %d", wid); };
+
 		for (int i = 0; i < 10; ++i) {
 			wth->PostTask(task);
 		}
+
+		wth->Reset();
 
 	}
 

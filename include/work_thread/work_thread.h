@@ -2,10 +2,11 @@
 #define _NAIVE_WORK_THREAD_H_
 
 #include "single_work_thread.h"
-#include "../ring_object_buffer.h"
-#include "../base_constructor.h"
+#include "ring_object_buffer.h"
+#include "base_constructor.h"
 
 #include <map>
+#include <shared_mutex>
 
 namespace naive {
 
@@ -63,6 +64,12 @@ public:
 		_maxAsyncBufSize = count;
 	}
 
+	void Reset() {
+		_smtx.lock();
+		_asyncBuf->Reset();
+		_smtx.unlock();
+	}
+
 	void Run() {
 		if (_runing) {
 			return;
@@ -72,7 +79,11 @@ public:
 
 		_tp->Run([this] {
 			std::unique_ptr<WorkTask> task;
-			if (_asyncBuf->Pop(task) && task.get()) {
+
+			_smtx.lock_shared();
+			bool ret = _asyncBuf->Pop(task);
+			_smtx.unlock_shared();
+			if (ret && task.get()) {
 				return task->Process();
 			}
 			return true;
@@ -86,7 +97,10 @@ public:
 			return -1;
 		}
 		std::lock_guard<std::mutex> lck(_mtx);
-		if (!_asyncBuf->Push(std::move(task))) {
+		_smtx.lock_shared();
+		bool ret = _asyncBuf->Push(std::move(task));
+		_smtx.unlock_shared();
+		if (!ret) {
 			return -1;
 		}
 		_tp->Notify();
@@ -115,7 +129,8 @@ private:
 	}
 	
 	std::mutex				_mtx;
-	SingleWorkThread			*_tp;
+	std::shared_mutex		_smtx;
+	SingleWorkThread		*_tp;
 	RingObjBuf<WorkTask>	*_asyncBuf;
 	bool					_runing;
 	uint32_t				_maxAsyncBufSize;
