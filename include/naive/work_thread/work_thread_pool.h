@@ -6,6 +6,8 @@
 #include <cstdint>
 #include <functional>
 
+#include "naive/work_task.h"
+
 namespace naive {
 
 #define WPP_INIT(x)  naive::WorkThreadPool::Instance()->Init(x)
@@ -18,11 +20,6 @@ namespace naive {
 
 #define WPP_RELEASE_SYNC_TASK(x) naive::WorkThreadPool::Instance()->ReleaseSyncTaskQueue(x)
 
-	struct ProcessorTask{
-		virtual void Processor() = 0;
-		virtual ~ProcessorTask() {}
-	};
-
 	class WorkThreadPool {
 	
 	public:
@@ -33,13 +30,13 @@ namespace naive {
 
 		virtual int CreateSyncTaskQueue(const std::string& name, uint32_t maxQueueSize = 24) = 0;
 		
-		virtual int PostSyncTask(const std::string& name, std::unique_ptr<ProcessorTask> task) = 0;
+		virtual int PostSyncTask(const std::string& name, std::unique_ptr<WorkTask> task) = 0;
 		
 		virtual int PostSyncTask(const std::string& name, std::function<void()> func) = 0;
 
 		virtual void ReleaseSyncTaskQueue(const std::string& name) = 0;
 
-		virtual int PostAsyncTask(std::unique_ptr<ProcessorTask> task) = 0;
+		virtual int PostAsyncTask(std::unique_ptr<WorkTask> task) = 0;
 
 		virtual int PostAsyncTask(std::function<void()> func) = 0;
 

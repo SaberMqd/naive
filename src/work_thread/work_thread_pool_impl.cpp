@@ -1,5 +1,5 @@
 #include "work_thread_pool_impl.h"
-#include "defer.h"
+#include "naive/defer.h"
 
 namespace naive {
 
@@ -33,7 +33,7 @@ void WorkThreadPoolImpl::Init(uint32_t defaultProcessorCount) {
 						continue;
 					}
 					bool ret = false;
-					std::unique_ptr<ProcessorTask> task;
+					std::unique_ptr<WorkTask> task;
 					{
 						wp.second->_mtx.lock();
 						if (WorkQueue::FREE == wp.second->_state) {
@@ -46,7 +46,7 @@ void WorkThreadPoolImpl::Init(uint32_t defaultProcessorCount) {
 					{
 						wp.second->_mtx.lock();
 						if (ret && task.get()) {
-							task->Processor();
+							task->Process();
 						}
 						wp.second->_state = WorkQueue::FREE;
 						wp.second->_mtx.unlock();
@@ -54,22 +54,22 @@ void WorkThreadPoolImpl::Init(uint32_t defaultProcessorCount) {
 					}
 				}
 			}
-			std::unique_ptr<ProcessorTask> task1;
+			std::unique_ptr<WorkTask> task1;
 			_popMtx.lock();
 			bool ret = _asyncTaskQueue->Pop(task1);
 			_popMtx.unlock();
 			if (ret && task1.get()) {
-				task1->Processor();
+				task1->Process();
 				return true;
 			}
 			return true;
 		});
 		_tps.push_back(tp);
 	}
-	_asyncTaskQueue = new RingObjBuf<ProcessorTask>(48);
+	_asyncTaskQueue = new RingObjBuf<WorkTask>(48);
 }
 
-int WorkThreadPoolImpl::PostSyncTask(const std::string& name, std::unique_ptr<ProcessorTask> task) {
+int WorkThreadPoolImpl::PostSyncTask(const std::string& name, std::unique_ptr<WorkTask> task) {
 	_shareMtx.lock_shared();
 	defer([this] { _shareMtx.unlock_shared(); });
 	auto wp = _wps.find(name);
@@ -94,7 +94,7 @@ int WorkThreadPoolImpl::PostSyncTask(const std::string& name, std::function<void
 	return PostSyncTask(name, std::move(t));
 }
 
-int WorkThreadPoolImpl::PostAsyncTask(std::unique_ptr<ProcessorTask> task) {
+int WorkThreadPoolImpl::PostAsyncTask(std::unique_ptr<WorkTask> task) {
 	bool ret = _asyncTaskQueue->Push(std::move(task));
 	for (auto tp : _tps) {
 		tp->Notify();
@@ -117,7 +117,7 @@ int WorkThreadPoolImpl::CreateSyncTaskQueue(const std::string& name, uint32_t ma
 	}
 
 	_wps[name] = new WorkQueue();
-	_wps[name]->_queue = new RingObjBuf<ProcessorTask>(maxQueueSize);
+	_wps[name]->_queue = new RingObjBuf<WorkTask>(maxQueueSize);
 
 	return 0;
 }

@@ -152,20 +152,30 @@
     <ClCompile Include="..\..\example\test_workthread.cpp" />
     <ClCompile Include="..\..\example\test_work_processor_pool.cpp" />
     <ClCompile Include="..\..\src\coroutine\coroutine_impl.cpp" />
+    <ClCompile Include="..\..\src\coroutine\win\context_impl.cpp" />
     <ClCompile Include="..\..\src\coroutine_pool\coroutine_pool_impl.cpp" />
     <ClCompile Include="..\..\src\log\log.cpp" />
     <ClCompile Include="..\..\src\log\win\win_log.cpp" />
+    <ClCompile Include="..\..\src\net\async_tcp_socket_impl.cpp" />
+    <ClCompile Include="..\..\src\net\async_udp_socket_impl.cpp" />
     <ClCompile Include="..\..\src\work_thread\block_single_work_thread_impl.cpp" />
     <ClCompile Include="..\..\src\work_thread\single_work_thread_impl.cpp" />
     <ClCompile Include="..\..\src\work_thread\work_thread_pool_impl.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\example\test.h" />
+    <ClInclude Include="..\..\include\naive\net\async_tcp_socket.h" />
+    <ClInclude Include="..\..\include\naive\net\async_udp_socket.h" />
+    <ClInclude Include="..\..\include\naive\net\common_socket_define.h" />
+    <ClInclude Include="..\..\include\naive\net\socket_addr.h" />
     <ClInclude Include="..\..\include\work_thread\work_thread.h" />
     <ClInclude Include="..\..\src\coroutine\coroutine_impl.h" />
     <ClInclude Include="..\..\src\coroutine\coroutine_base_define.h" />
+    <ClInclude Include="..\..\src\coroutine\win\context_impl.h" />
     <ClInclude Include="..\..\src\coroutine_pool\coroutine_pool_impl.h" />
     <ClInclude Include="..\..\src\log\win\win_log.h" />
+    <ClInclude Include="..\..\src\net\async_tcp_socket_impl.h" />
+    <ClInclude Include="..\..\src\net\async_udp_socket_impl.h" />
     <ClInclude Include="..\..\src\work_thread\block_single_work_thread_impl.h" />
     <ClInclude Include="..\..\src\work_thread\single_work_thread_impl.h" />
     <ClInclude Include="..\..\src\work_thread\work_thread_pool_impl.h" />

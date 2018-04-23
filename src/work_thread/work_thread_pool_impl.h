@@ -1,16 +1,16 @@
 #ifndef _NAIVE_WORK_THREAD_POOL_IMPL_H_
 #define _NAIVE_WORK_THREAD_POOL_IMPL_H_
 
-#include "work_thread/work_thread_pool.h"
+#include "naive/work_thread/work_thread_pool.h"
 #include <map>
 #include <list>
 #include <atomic>
 #include <mutex>
 #include <shared_mutex>
 
-#include "work_thread/single_work_thread.h"
-#include "read_write_lock.h"
-#include "ring_object_buffer.h"
+#include "naive/work_thread/single_work_thread.h"
+#include "naive/read_write_lock.h"
+#include "naive/ring_object_buffer.h"
 
 namespace naive {
 
@@ -24,13 +24,13 @@ namespace naive {
 
 		int CreateSyncTaskQueue(const std::string& name, uint32_t maxQueueSize) override;
 		
-		int PostSyncTask(const std::string& name, std::unique_ptr<ProcessorTask> task) override;
+		int PostSyncTask(const std::string& name, std::unique_ptr<WorkTask> task) override;
 
 		int PostSyncTask(const std::string& name, std::function<void()> func) override;
 
 		void ReleaseSyncTaskQueue(const std::string& name) override;
 
-		int PostAsyncTask(std::unique_ptr<ProcessorTask> task) override;
+		int PostAsyncTask(std::unique_ptr<WorkTask> task) override;
 
 		int PostAsyncTask(std::function<void()> func) override;
 
@@ -45,23 +45,24 @@ namespace naive {
 				BUSY,
 			};
 			std::atomic<State> _state = FREE;
-			RingObjBuf<ProcessorTask> *_queue = nullptr;
+			RingObjBuf<WorkTask> *_queue = nullptr;
 			std::mutex _mtx;
 			~WorkQueue() {
 				SafeDelete(_queue);
 			}
 		};
 
-		struct CluserTask : public ProcessorTask {
+		struct CluserTask : public WorkTask {
 			std::function<void()> _f = nullptr;
-			void Processor() {
+			bool Process() {
 				_f();
+				return true;
 			}
 		};
 
 		std::map<std::string, WorkQueue*> _wps;
 		std::list<SingleWorkThread*>		  _tps;
-		RingObjBuf<ProcessorTask> *_asyncTaskQueue;
+		RingObjBuf<WorkTask> *_asyncTaskQueue;
 
 		std::mutex _pushMtx;
 		std::mutex _popMtx;

@@ -1,9 +1,9 @@
 #ifndef _NAIVE_TEST_H_
 #define _NAIVE_TEST_H_
 
-#include "log.h"
-#include "work_thread/work_thread.h"
-#include "scoped_ref_ptr.h"
+#include "naive/log.h"
+#include "naive/work_thread/work_thread.h"
+#include "naive/scoped_ref_ptr.h"
 
 using namespace naive;
 

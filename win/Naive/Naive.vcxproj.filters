@@ -31,8 +31,14 @@
     <Filter Include="头文件\work_thread\block_single_work_thread">
       <UniqueIdentifier>{4b31ba4a-31d6-4844-835f-ee380cfa9bb7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="work_thread_pool">
+    <Filter Include="头文件\work_thread_pool">
       <UniqueIdentifier>{40f91bc4-bff5-4442-842d-32d862b75186}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\coroutine\context">
+      <UniqueIdentifier>{dadff306-46ed-4428-ad90-7dd3aba9d095}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\net">
+      <UniqueIdentifier>{2e136d09-6b25-4690-87af-476825aea8d0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -61,7 +67,7 @@
       <Filter>头文件\work_thread\single_work_thread</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\work_thread\work_thread_pool_impl.cpp">
-      <Filter>work_thread_pool</Filter>
+      <Filter>头文件\work_thread_pool</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\work_thread\block_single_work_thread_impl.cpp">
       <Filter>头文件\work_thread\block_single_work_thread</Filter>
@@ -71,6 +77,15 @@
     </ClCompile>
     <ClCompile Include="..\..\src\coroutine\coroutine_impl.cpp">
       <Filter>头文件\coroutine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\coroutine\win\context_impl.cpp">
+      <Filter>头文件\coroutine\context</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\net\async_tcp_socket_impl.cpp">
+      <Filter>头文件\net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\net\async_udp_socket_impl.cpp">
+      <Filter>头文件\net</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -87,7 +102,7 @@
       <Filter>头文件\work_thread\single_work_thread</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\work_thread\work_thread_pool_impl.h">
-      <Filter>work_thread_pool</Filter>
+      <Filter>头文件\work_thread_pool</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\work_thread\block_single_work_thread_impl.h">
       <Filter>头文件\work_thread\block_single_work_thread</Filter>
@@ -100,6 +115,27 @@
     </ClInclude>
     <ClInclude Include="..\..\src\coroutine\coroutine_impl.h">
       <Filter>头文件\coroutine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\coroutine\win\context_impl.h">
+      <Filter>头文件\coroutine\context</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\net\async_tcp_socket_impl.h">
+      <Filter>头文件\net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\net\async_udp_socket_impl.h">
+      <Filter>头文件\net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\naive\net\async_tcp_socket.h">
+      <Filter>头文件\net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\naive\net\async_udp_socket.h">
+      <Filter>头文件\net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\naive\net\common_socket_define.h">
+      <Filter>头文件\net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\naive\net\socket_addr.h">
+      <Filter>头文件\net</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

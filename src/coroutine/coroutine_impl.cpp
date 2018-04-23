@@ -14,5 +14,17 @@ namespace naive {
 
 	}
 
+	void CoroutineImpl::PostTask(std::function<void()> func) {
+
+	}
+
+	void CoroutineImpl::PostTask(std::unique_ptr<WorkTask> task) {
+
+	}
+
+	void CoroutineImpl::Yield() {
+
+	}
+
 
 }

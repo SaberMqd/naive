@@ -4,6 +4,7 @@
 #include "single_work_thread.h"
 #include "ring_object_buffer.h"
 #include "base_constructor.h"
+#include "work_task.h"
 
 #include <map>
 #include <shared_mutex>
@@ -13,22 +14,6 @@ namespace naive {
 #define WPM_CREATE_WORK naive::WorkThreadManager::GetInstance()->CreateWrokThread
 #define WPM_GET_WORK(x) naive::WorkThreadManager::GetInstance()->GetWrokThread(x)
 #define WPM_DELETE_WORK(x) naive::WorkThreadManager::GetInstance()->DeleteWorkThread(x) 
-
-class WorkTask {
-
-public:
-
-	virtual bool Process() = 0;
-
-	virtual ~WorkTask() {}
-
-	explicit WorkTask() {}
-
-private:
-
-	DISALLOW_COPY_AND_ASSIGN(WorkTask);
-
-};
 
 template <class Closure>
 class ClosureTask : public WorkTask {

@@ -1,5 +1,5 @@
 #include "single_work_thread_impl.h"
-#include "safe_delete.h"
+#include "naive/safe_delete.h"
 
 namespace naive {
 

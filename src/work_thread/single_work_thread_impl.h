@@ -1,10 +1,10 @@
 #ifndef _NAIVE_THREAD_PROCESSOR_RELIABLE_H_
 #define _NAIVE_THREAD_PROCESSOR_RELIABLE_H_
 
-#include "work_thread/single_work_thread.h"
+#include "naive/work_thread/single_work_thread.h"
 
-#include "base_constructor.h"
-#include "safe_wait.h"
+#include "naive/base_constructor.h"
+#include "naive/safe_wait.h"
 
 #include <mutex>
 #include <thread>

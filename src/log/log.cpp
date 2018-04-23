@@ -2,9 +2,9 @@
 // Created by mqd on 2016/11/24.
 //
 
-#include "log.h"
-#include "safe_wait.h"
-#include "work_thread/work_thread.h"
+#include "naive/log.h"
+#include "naive/safe_wait.h"
+#include "naive/work_thread/work_thread.h"
 #include <stdarg.h>
 
 namespace naive {

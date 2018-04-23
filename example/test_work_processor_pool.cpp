@@ -1,6 +1,6 @@
 #include "test.h"
 
-#include "work_thread/work_thread_pool.h"
+#include "naive/work_thread/work_thread_pool.h"
 #include <iostream>
 
 using namespace std;

@@ -18,7 +18,6 @@ void TestWorkThread() {
 
 	}
 
-	//delete this workthread nodelay
 	WPM_DELETE_WORK(wid); 
 
 	_sleep(2 * 1000);
