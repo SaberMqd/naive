@@ -30,99 +30,143 @@ public:
 	}
 
 	bool Push(const T* in_buf, uint32_t len) {
-		if (((_end + 1 + len) % _len == _beg) || len > _len) {
+		if (len > GetSpareLen()) {
 			return false;
 		}
-		if (_len - _end >= len) {
-			memcpy(_buf + _end, in_buf, len * sizeof(T));
+		if (_beg > _end) {
+			if (_beg - _end ==1){
+				return false;
+			}
 			_end += len;
-			_end %= _len;
-		} else {
+			memcpy(_buf + _end, in_buf, len * sizeof(T));
+		} else {//_beg <= _end
 			uint32_t afterLen = _len - _end;
-			memcpy(_buf + _end, in_buf, afterLen * sizeof(T));
-			uint32_t frontLen = len - afterLen;
-			memcpy(_buf, in_buf + afterLen, frontLen * sizeof(T));
-			_end = frontLen;
+			if (afterLen > len) {//
+				memcpy(_buf + _end, in_buf, len * sizeof(T));
+				_end += len;
+			} else {
+				memcpy(_buf + _end, in_buf, afterLen * sizeof(T));
+				uint32_t frontLen = len - afterLen;
+				_end = frontLen ;//
+				memcpy(_buf, in_buf + afterLen, frontLen * sizeof(T));
+			}
 		}
 		return true;
 	}
 
 	T* Pop(uint32_t len) {
-		if ((_beg + len) % _len == _end || len > _len) {
+		if ((_len -1 - GetSpareLen()) < len) {//
 			return nullptr;
 		}
 		T* tempBuf = new T[len];
-		if (_end > _beg){
-			memcpy(tempBuf, _buf + _beg, len * sizeof(T));
-			_beg += len;
-		} else {
-			uint32_t afterLen = _len - _beg;
-			if (afterLen >= len) {
+		if (_beg > _end) {
+			uint32_t afterLen = _len - _beg - 1;
+			if (afterLen > len) {//
 				memcpy(tempBuf, _buf + _beg, len * sizeof(T));
 				_beg += len;
-				_beg %= _len;
-			} else {
-				memcpy(tempBuf, _buf + _beg, afterLen * sizeof(T));
-				uint32_t frontLen = len - afterLen;
-				memcpy(tempBuf + afterLen, _buf, frontLen * sizeof(T));
-				_beg = frontLen;
+				return tempBuf;
 			}
+			memcpy(tempBuf, _buf + _beg, afterLen * sizeof(T));
+			uint32_t frontLen = len - afterLen;
+			memcpy(tempBuf + afterLen, _buf, frontLen * sizeof(T));
+			_beg = frontLen;
+		} else {
+			memcpy(tempBuf, _buf + _beg, len * sizeof(T));
+			_beg += len;
 		}
 		return tempBuf;
 	}
 
-	bool Pop(T* in_buf, uint32_t len) {
-		if (GetContentLen() < len || len > _len){
+	bool Pop(T* in_buf, uint32_t len) {		
+		if ((_len - 1 - GetSpareLen()) < len) {//
 			return false;
 		}
-		if (_end > _beg){
-			memcpy(in_buf, _buf + _beg, len * sizeof(T));
-			_beg += len;
-		} else {
+		if (_beg > _end) {
 			uint32_t afterLen = _len - _beg;
-			if (afterLen >= len) {
+			if (afterLen > len) {//
 				memcpy(in_buf, _buf + _beg, len * sizeof(T));
 				_beg += len;
-				_beg %= _len;
-			} else {
-				memcpy(in_buf, _buf + _beg, afterLen * sizeof(T));
-				uint32_t frontLen = len - afterLen;
-				memcpy(in_buf + afterLen, _buf, frontLen * sizeof(T));
-				_beg = frontLen;
+				return true;
 			}
+			memcpy(in_buf, _buf + _beg, afterLen * sizeof(T));
+			uint32_t frontLen = len - afterLen;
+			memcpy(in_buf + afterLen, _buf, frontLen * sizeof(T));
+			_beg = frontLen;
+		}
+		else {
+			memcpy(in_buf, _buf + _beg, len * sizeof(T));
+			_beg += len;
 		}
 		return true;
 	}
 
 	uint32_t TryPop(T* in_buf, uint32_t len) {
-		const uint32_t contentLen = GetContentLen();
+		const uint32_t contentLen = (_len - 1 - GetSpareLen());//
 		if (contentLen < len) {
 			Pop(in_buf, contentLen);
 			return contentLen;		
-		} 
+		}
 		Pop(in_buf, len);
 		return len;
 	}
 
-	bool Front(uint32_t len) {
-		if ((_beg + len) % _len == _end || len > _len){
+	uint32_t Size() {
+		return _len - 1 - GetSpareLen();
+	}
+
+	bool PushBack(const T* in_buf, uint32_t len) {
+		if (len > GetSpareLen()) {
 			return false;
 		}
-		if (_end > _beg){
-			_beg += len;
-		}
-		else {
-			uint32_t afterLen = _len - _beg;
-			if (afterLen >= len) {
-				_beg += len;
-				_beg %= _len;
-			}
-			else {
-				uint32_t frontLen = len - afterLen;
-				_beg = frontLen;
+		if (_beg > _end) {
+			_beg -= len;
+			memcpy(_buf + _beg, in_buf, len * sizeof(T));
+		}else {//_beg<=_end
+			if (_beg >= len) {
+				_beg -= len;
+				memcpy(_buf + _beg, in_buf, len * sizeof(T));
+			}else {
+				uint32_t frontLen = len - _beg;
+				memcpy(_buf + (_len - frontLen), in_buf, frontLen * sizeof(T));
+				memcpy(_buf, in_buf + _beg, _beg * sizeof(T));//
+				_beg = _len - frontLen;
 			}
 		}
 		return true;
+	}
+
+	bool PopBack(T* in_buf, uint32_t len) {
+		if ((_len - 1 - GetSpareLen()) < len) {//
+			return false;
+		}
+		if (_beg > _end) {
+			if (len <= _end) {
+				memcpy(in_buf, _buf + (_end - len), len * sizeof(T));
+				_end -= len;
+				return true;
+			}
+			uint32_t frontLen = len - _end;
+			memcpy(in_buf, _buf + (_len - frontLen), frontLen * sizeof(T));
+			memcpy(in_buf + frontLen, _buf, _end * sizeof(T));
+			_end = (_len - frontLen);
+		}else {
+			if (_beg == _end) {
+				return false;
+			}
+			memcpy(in_buf, _buf + (_end - len), len * sizeof(T));//
+			_end -= len;
+		}
+		return true;
+	}
+
+	uint32_t TryPopBack(T* in_buf, uint32_t len) {
+		const uint32_t contentLen = (_len - 1 - GetSpareLen());//
+		if (contentLen < len) {
+			PopBack(in_buf, contentLen);
+			return contentLen;
+		}
+		PopBack(in_buf, len);
+		return len;
 	}
 
 	~RingBuf() {
@@ -136,13 +180,14 @@ private:
 	uint32_t _len;
 	T*      _buf;
 
-	uint32_t GetContentLen() const {
+	uint32_t GetSpareLen() const {
 		if (_beg < _end){
-			return (_end - _beg);
+			return (_len - (_end - _beg) - 1);
 		} else if (_beg > _end) {
-			return (_len - (_beg - _end));
+			return (_beg - _end - 1);
+		} else {
+			return _len - 1;//
 		}
-		return 0;
 	}
 	DISALLOW_COPY_AND_ASSIGN(RingBuf)
 };

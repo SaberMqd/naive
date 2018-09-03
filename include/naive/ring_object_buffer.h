@@ -60,6 +60,14 @@ public:
 		_end = 0;
 	}
 
+	uint32_t Size() {
+		if (_end >= _beg) {
+			return _end - _beg;
+		} else {
+			return _len - 1 - (_beg - _end);
+		}
+	}
+
 	~RingObjBuf() {
 		SafeDeleteArray(_buf);
 	}
